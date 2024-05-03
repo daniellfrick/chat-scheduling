@@ -26,7 +26,7 @@ if __name__ == '__main__':
 
     employees = []
     # load employees from file
-    with open("employees.csv") as f:
+    with open("../data/employees.csv") as f:
         headers = f.readline()
         for line in f:
             name, shifts, days_worked, start_time, end_time = line.replace(" ", "").replace("\n", "").split(',')
@@ -109,7 +109,7 @@ if __name__ == '__main__':
             model.add(sum(workers_in_shift) == sched.schedule_requirements[d][s])
 
     # add requested time off
-    with open("shifts_off.csv") as f:
+    with open("../data/shifts_off.csv") as f:
         headers = f.readline()
         for line in f:
             employee_name, day_off, shift_off = line.replace(" ", "").replace("\n", "").split(',')
@@ -125,7 +125,7 @@ if __name__ == '__main__':
     # Enumerate all solutions.
     solver.parameters.enumerate_all_solutions = True
 
-    saved_sched = sched.load_schedule_from_file("saved_sched.csv")
+    saved_sched = sched.load_schedule_from_file("../data/saved_sched.csv")
     sched.assign_schedule_from_dict(saved_sched)
 
     solution_limit = 1000
@@ -142,7 +142,7 @@ if __name__ == '__main__':
     print(f"  - wall time      : {solver.wall_time} s")
     print(f"  - solutions found: {solution_printer.solution_count()}")
 
-    new_sched = sched.load_schedule_from_file("best_new.csv")
+    new_sched = sched.load_schedule_from_file("../data/best_new.csv")
     num_diff, added_shifts, removed_shifts = models.compare_schedules(saved_sched, new_sched)
 
     print(f"\nBetween the old shift and new we have {num_diff} differences.\n")

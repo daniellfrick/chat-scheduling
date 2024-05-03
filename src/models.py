@@ -91,7 +91,7 @@ class Schedule:
     def set_schedule(self, day: str, shift: str, shift_worked: bool):
         self.schedule[self.inverted_days[day]][self.inverted_shifts[shift]] = shift_worked
 
-    def load_schedule_from_file(self, filename: str = "current_schedule.csv"):
+    def load_schedule_from_file(self, filename: str = "../data/current_schedule.csv"):
         filled_schedule = {}
         try:
             with open(filename) as f:

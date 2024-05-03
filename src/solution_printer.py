@@ -48,7 +48,7 @@ class ScheduleSolutionPrinter(cp_model.CpSolverSolutionCallback):
 
         if self._solution_count >= self._solution_limit:
             print(f"Stop search after {self._solution_limit} solutions. Best solution is {self.best_difference} changes.")
-            self._schedule.save_schedule_to_file("best_new.csv", self.best_solution)
+            self._schedule.save_schedule_to_file("../data/best_new.csv", self.best_solution)
             self.stop_search()
 
     def solution_count(self):
