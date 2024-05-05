@@ -22,6 +22,8 @@ def set_hours(schedule: Schedule):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+    current_schedule_file_name = "../data/saved_sched.csv"
+
     model = cp_model.CpModel()
 
     employees = []
@@ -125,7 +127,7 @@ if __name__ == '__main__':
     # Enumerate all solutions.
     solver.parameters.enumerate_all_solutions = True
 
-    saved_sched = sched.load_schedule_from_file("../data/saved_sched.csv")
+    saved_sched = sched.load_schedule_from_file(current_schedule_file_name)
     sched.assign_schedule_from_dict(saved_sched)
 
     solution_limit = 1000
@@ -142,7 +144,7 @@ if __name__ == '__main__':
     print(f"  - wall time      : {solver.wall_time} s")
     print(f"  - solutions found: {solution_printer.solution_count()}")
 
-    new_sched = sched.load_schedule_from_file("../data/best_new.csv")
+    new_sched = sched.load_schedule_from_file("../data/best_new_sched.csv")
     num_diff, added_shifts, removed_shifts = models.compare_schedules(saved_sched, new_sched)
 
     print(f"\nBetween the old shift and new we have {num_diff} differences.\n")
